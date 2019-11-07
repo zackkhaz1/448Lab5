@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> Post submitter </title>
+</head>
+
+<body>
+  <h2> <?php session_start(); $name = $_SESSION['username']; echo "Welcome " .$name;?> </h2>
+  <form action="CreatePosts.php" method="POST">
+    <textarea name="userPost" rows="5" cols="70"> </textarea>
+    <input type="submit" id="submitPost" value="Submit post!">
+  </form>
+</body>
+
+</html>

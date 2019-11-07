@@ -1,0 +1,52 @@
+<html>
+
+<head>
+  <title> Delete Posts here </title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+  <center>
+    <h1> Delete? </h1>
+  </center>
+  <form action='DeletePost.php' method='POST'>
+    <?php
+  $mysqli = new mysqli("mysql.eecs.ku.edu", "zack_khaz", "jo9aiyaa", "zack_khaz");
+  if ($mysqli->connect_errno) {
+     printf("Connect failed: %s\n", $mysqli->connect_error);
+     exit();
+  }
+  $users = "SELECT author_id FROM posts";
+  $result = $mysqli->query($users) or die($mysqli->error);
+  echo "<center>";
+
+  echo "<table>";
+  echo "<tr>";
+  echo "<th>Authors:  </th>";
+  while($row = $result->fetch_assoc())
+      {
+        echo "<td>".$row["author_id"]."</td> ";
+      }
+  echo "</tr>";
+  echo "<tr>";
+    $users = "SELECT content FROM posts";
+    $result = $mysqli->query($users) or die($mysqli->error);
+  echo "<th>Posts: </th>";
+
+  while($row = $result->fetch_assoc())
+    {
+      echo "<td> ".$row["content"]."";
+      echo "<input type='checkbox' name='delete[]' value='".$row["content"]."' >";
+      echo "</td>";
+    }
+  echo "</tr>";
+  echo "</table>";
+   ?>
+    <input type="submit" value="Delete selected posts?">
+  </form>
+
+
+
+</body>
+
+</html>

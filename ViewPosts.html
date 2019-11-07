@@ -1,0 +1,37 @@
+<html>
+
+<head>
+  <title> View all posts here </title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+
+</head>
+
+<body>
+  <form action="ViewPosts.php" method="POST">
+    <select name="users">";
+      <?php
+    $mysqli = new mysqli("mysql.eecs.ku.edu", "zack_khaz", "jo9aiyaa", "zack_khaz");
+    if ($mysqli->connect_errno) {
+       printf("Connect failed: %s\n", $mysqli->connect_error);
+       exit();
+    }
+
+    $users = "SELECT * FROM usersLab5";
+    $result = $mysqli->query($users);
+    echo "<center>";
+    while($row = $result->fetch_assoc())
+      {
+        $name = $row["userID"];
+        echo "<option value=".$row["userID"]."> $name";
+        echo "</option>";
+      }
+
+      ?>
+    </select>
+    <br> <br>
+    <input type="submit" value="View posts for selected user">
+    </center>
+  </form>
+</body>
+
+</html>
